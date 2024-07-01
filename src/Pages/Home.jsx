@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import logo from './logo.jpg'
+import logo from './logo.png'
 import axios from 'axios';
 const Home = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
