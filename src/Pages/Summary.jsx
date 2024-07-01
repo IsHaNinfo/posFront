@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from './logo.png';
+import Sidebar from '../components/Sidebar'; // Import the Sidebar component
 
 const Summary = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -123,91 +124,8 @@ const Summary = () => {
                 </div>
             </nav>
 
-            <br /><br /><br />
+            <Sidebar isOpen={isNavOpen} toggleNav={toggleNav} handleButtonClick={handleButtonClick} Logout={Logout} />
 
-            <h2><i class="bi bi-grid-1x2-fill"> </i>Summay</h2>
-            <br />
-            <div className="container">
-                <div
-                    className={`offcanvas offcanvas-start ${isNavOpen ? 'show' : ''}`}
-                    tabIndex="-1"
-                    id="offcanvasNav"
-                    aria-labelledby="offcanvasNavLabel"
-                >
-                    <div className="offcanvas-header">
-                        <h5 className="offcanvas-title" id="offcanvasNavLabel">
-                            Main Menu
-                        </h5>
-                        <button
-                            type="button"
-                            className="btn-close text-reset"
-                            data-bs-dismiss="offcanvas"
-                            aria-label="Close"
-                            onClick={toggleNav}
-                        ></button>
-                    </div>
-                    <div className="offcanvas-body">
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <button
-                                    type="button"
-                                    className="btn-offcanvas "
-                                    onClick={() => handleButtonClick('dashboard')}
-                                ><i class="bi bi-house-fill" > </i>
-                                    Dashboard
-                                </button>
-                            </li>
-                            <li className="nav-item">
-                                <button
-                                    type="button"
-                                    className="btn-offcanvas"
-                                    onClick={() => handleButtonClick('category')}
-                                ><i class="bi bi-list-ul"> </i>
-                                    Category
-                                </button>
-                            </li>
-                            <li className="nav-item">
-                                <button
-                                    type="button"
-                                    className="btn-offcanvas"
-                                    onClick={() => handleButtonClick('products')}
-                                ><i class="bi bi-stack"> </i>
-                                    Products
-                                </button>
-                            </li>
-                            <li className="nav-item">
-                                <button
-                                    type="button"
-                                    className="btn-offcanvas"
-                                    onClick={() => handleButtonClick('orders')}
-                                ><i class="bi bi-cart-plus-fill"> </i>
-                                    Orders
-                                </button>
-                            </li>
-                            <li className="nav-item">
-                                <button
-                                    type="button"
-                                    className="btn-offcanvas"
-                                    onClick={() => handleButtonClick('summary')}
-                                ><i class="bi bi-grid-1x2-fill"> </i>
-                                    Summary
-                                </button>
-                            </li>
-                        </ul>
-                        <br /><br /><br /><br /><br /><br /><br /><br /><br />
-                        <div className='col-md-8'>
-                            <button
-                                className="btn btn-primary"
-                                onClick={() => Logout()}
-                            >
-                                <i className="bi bi-box-arrow-right"></i> Logout
-                            </button>
-                        </div>
-
-                    </div>
-                    <div></div>
-                </div>
-            </div>
 
 
 

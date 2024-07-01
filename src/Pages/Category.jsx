@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from './logo.png';
+import Sidebar from '../components/Sidebar'; // Import the Sidebar component
 
 const Category = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
