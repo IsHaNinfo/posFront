@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import logo from './logo.png'
 import axios from 'axios';
+import Sidebar from '../components/Sidebar'; // Import the Sidebar component
+
 const Home = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [name, setName] = useState(null);
@@ -139,6 +141,17 @@ const Home = () => {
     navigate("/login");
   };
 
+  const cardStyle = {
+    width: "80%",
+    fontSize: "1.5rem",
+    background: "linear-gradient(to right, #03a637,#03a655)",
+    transition: "transform 0.3s, box-shadow 0.3s",
+  };
+
+  const cardHoverStyle = {
+    transform: "scale(1.05)",
+    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
+  };
   return (
     <>
       <nav className="navbar bg-primary fixed-top" data-bs-theme="white">
@@ -166,114 +179,52 @@ const Home = () => {
         </div>
       </nav>
 
-      <h1>Home</h1>
+      <Sidebar isOpen={isNavOpen} toggleNav={toggleNav} handleButtonClick={handleButtonClick} Logout={Logout} />
 
-      <div className="container">
-        <div
-          className={`offcanvas offcanvas-start ${isNavOpen ? 'show' : ''}`}
-          tabIndex="-1"
-          id="offcanvasNav"
-          aria-labelledby="offcanvasNavLabel"
-        >
-          <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasNavLabel">
-              Main Menu
-            </h5>
-            <button
-              type="button"
-              className="btn-close text-reset"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-              onClick={toggleNav}
-            ></button>
-          </div>
-          <div className="offcanvas-body">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <button
-                  type="button"
-                  className="btn-offcanvas "
-                  onClick={() => handleButtonClick('dashboard')}
-                ><i class="bi bi-house-fill" > </i>
-                  Dashboard
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  type="button"
-                  className="btn-offcanvas"
-                  onClick={() => handleButtonClick('category')}
-                ><i class="bi bi-list-ul"> </i>
-                  Category
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  type="button"
-                  className="btn-offcanvas"
-                  onClick={() => handleButtonClick('products')}
-                ><i class="bi bi-stack"> </i>
-                  Products
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  type="button"
-                  className="btn-offcanvas"
-                  onClick={() => handleButtonClick('orders')}
-                ><i class="bi bi-cart-plus-fill"> </i>
-                  Orders
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  type="button"
-                  className="btn-offcanvas"
-                  onClick={() => handleButtonClick('summary')}
-                ><i class="bi bi-grid-1x2-fill"> </i>
-                  Summary
-                </button>
-              </li>
-            </ul>
-
-            <br /><br /><br /><br /><br /><br /><br /><br /><br />
-
-            <div className='col-md-8'>
-              <button
-                className="btn btn-primary"
-                onClick={() => Logout()}
-              >
-                <i className="bi bi-box-arrow-right"></i> Logout
-              </button>
-            </div>
-
-
-          </div>
-
-        </div>
-      </div>
+     
+         
 
       <br />
-      <h2><i class="bi bi-grid-fill"> </i>  Dashboard</h2>
+      <h3><i class="bi bi-grid-fill " style={{marginLeft:"25px"}}> </i>  Dashboard</h3>
 
       <div className="container">
         <div className="row">
 
-          <div className="col-lg-6 col-md-8 col-12 mb-4">
-            <div className="card mt-4 bg-primary text-white" style={{ width: "80%", fontSize: "1.5rem" }}>
-              <div className="card-body">
-                <h5 className="card-title">Today's Total Sales</h5>
-                {totalSales !== null ? (
-                  <p className="card-text">{totalSales} LKR</p>
-                ) : (
-                  <p className="card-text">Loading...</p>
-                )}
-              </div>
+        <div className="col-lg-6 col-md-8 col-12 mb-4">
+          <div
+            className="card mt-4 text-white"
+            style={cardStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = cardHoverStyle.transform;
+              e.currentTarget.style.boxShadow = cardHoverStyle.boxShadow;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "";
+              e.currentTarget.style.boxShadow = "";
+            }}
+          >
+            <div className="card-body">
+              <h5 className="card-title">Today's Total Sales</h5>
+              {totalSales !== null ? (
+                <p className="card-text">{totalSales} LKR</p>
+              ) : (
+                <p className="card-text">Loading...</p>
+              )}
             </div>
           </div>
+        </div>
 
           <div className="col-lg-6 col-md-8 col-12 mb-4">
-            <div className="card mt-4 bg-primary text-white" style={{ width: "80%", fontSize: "1.5rem" }}>
+            <div className="card mt-4  text-white"   style={cardStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = cardHoverStyle.transform;
+              e.currentTarget.style.boxShadow = cardHoverStyle.boxShadow;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "";
+              e.currentTarget.style.boxShadow = "";
+            }}
+          >
               <div className="card-body">
                 <h5 className="card-title">Today's Total Orders</h5>
                 {totalSales !== null ? (
@@ -286,8 +237,16 @@ const Home = () => {
           </div>
 
           <div className="col-lg-6 col-md-8 col-12 mb-4">
-            <div className="card mt-4 bg-success text-white" style={{ width: "80%", fontSize: "1.5rem" }}>
-              <div className="card-body">
+          <div className="card mt-4  text-white"   style={cardStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = cardHoverStyle.transform;
+              e.currentTarget.style.boxShadow = cardHoverStyle.boxShadow;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "";
+              e.currentTarget.style.boxShadow = "";
+            }}
+          >              <div className="card-body">
                 <h5 className="card-title">My Total Sales</h5>
                 {totalSales !== null ? (
                   <p className="card-text"> {utotalsales} LKR</p>
@@ -299,8 +258,16 @@ const Home = () => {
           </div>
 
           <div className="col-lg-6 col-md-8 col-12 mb-4">
-            <div className="card mt-4 bg-success text-white" style={{ width: "80%", fontSize: "1.5rem" }}>
-              <div className="card-body">
+          <div className="card mt-4  text-white"   style={cardStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = cardHoverStyle.transform;
+              e.currentTarget.style.boxShadow = cardHoverStyle.boxShadow;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "";
+              e.currentTarget.style.boxShadow = "";
+            }}
+          >              <div className="card-body">
                 <h5 className="card-title">My Total Orders</h5>
                 {totalSales !== null ? (
                   <p className="card-text"> {utotalorderqty} </p>
@@ -312,8 +279,16 @@ const Home = () => {
           </div>
 
           <div className="col-lg-6 col-md-8 col-12 mb-4">
-            <div className="card mt-4 bg-success text-white" style={{ width: "80%", fontSize: "1.5rem" }}>
-              <div className="card-body">
+          <div className="card mt-4  text-white"   style={cardStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = cardHoverStyle.transform;
+              e.currentTarget.style.boxShadow = cardHoverStyle.boxShadow;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "";
+              e.currentTarget.style.boxShadow = "";
+            }}
+          >              <div className="card-body">
                 <h5 className="card-title">Today My Total Sales</h5>
                 {totalSales !== null ? (
                   <p className="card-text"> {todayutotalorderqty} LKR</p>
@@ -325,8 +300,16 @@ const Home = () => {
           </div>
 
           <div className="col-lg-6 col-md-8 col-12 mb-4">
-            <div className="card mt-4 bg-success text-white" style={{ width: "80%", fontSize: "1.5rem" }}>
-              <div className="card-body">
+          <div className="card mt-4  text-white"   style={cardStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = cardHoverStyle.transform;
+              e.currentTarget.style.boxShadow = cardHoverStyle.boxShadow;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "";
+              e.currentTarget.style.boxShadow = "";
+            }}
+          >              <div className="card-body">
                 <h5 className="card-title">Today My Total Orders</h5>
                 {totalSales !== null ? (
                   <p className="card-text"> {todayTotOrders} </p>

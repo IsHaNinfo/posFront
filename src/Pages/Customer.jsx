@@ -6,17 +6,33 @@ import axios from "axios";
 const Customer = () => {
     const [category, setCategory] = useState(null);
     const [products, setProducts] = useState(null);
+    const [name, setName] = useState(null);
+
     const [formData, setFormData] = useState({
         name: "",
         mobile: "",
         email: "",
     });
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate('/login');
+        } else {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            func();
+        }
+    }, []);
+
+    const func = () => {
+        setName(localStorage.getItem('user'));
+    };
+
     const params = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
-
+        // If you need to fetch data on component mount
     }, []);
 
     const handleChange = (e) => {
@@ -30,22 +46,21 @@ const Customer = () => {
         e.preventDefault();
         console.log("Form submitted:", formData);
 
-
         axios.post("http://localhost:8080/customers", formData)
             .then(response => {
                 console.log("Response:", response.data);
                 navigate("/checkout");
-
+                console.log(response);
             })
             .catch(error => {
                 console.error("Error:", error);
-
+                console.log(error);
             });
     };
-
     const goBackToProducts = () => {
         navigate('/checkout');
     };
+
 
     return (
         <>

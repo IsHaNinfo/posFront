@@ -106,7 +106,7 @@ const Product = () => {
 
       <div className="main-content">
         <h1>Product</h1>
-        <h2><i className="bi bi-archive-fill"> </i>Products</h2>
+        <h3 style={{marginLeft:"25px" ,marginTop:"15px"}}><i className="bi bi-archive-fill"> </i>Products</h3>
         <div className="container">
           <div className="row">
             {products && products.map((product) => (
